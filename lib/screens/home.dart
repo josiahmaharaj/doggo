@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:events_mobile/widgets/calendar_card.dart';
+import 'package:events_mobile/widgets/category_card.dart';
+import 'package:events_mobile/widgets/event_card.dart';
 import 'package:flutter/material.dart';
 import '../components/colors.dart';
 
@@ -57,16 +60,14 @@ class Home extends StatelessWidget {
               SliverToBoxAdapter(
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  height: 100.0,
+                  height: 80.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return Container(
-                        width: 100.0,
-                        child: Card(
-                          child: Text('June'),
-                        ),
+                        width: 80.0,
+                        child: CalendarCard(),
                       );
                     },
                   ),
@@ -74,56 +75,44 @@ class Home extends StatelessWidget {
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(25.0, 8.0, 25.0, 0.0),
                   height: 50.0,
                   child: Text(
                     'Events Filter',
-                    style: TextStyle(color: emPrimaryColor),
+                    style: TextStyle(color: emPrimaryColor, fontSize: 16.0),
                   ),
                 ),
               ),
               SliverToBoxAdapter(
                 child: Container(
                   padding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-                  height: 100.0,
+                  height: 90.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return Container(
-                        width: 100.0,
-                        child: Card(
-                            child: Column(
-                          children: <Widget>[
-                            Icon(Icons.star),
-                            Text('Category')
-                          ],
-                        )),
-                      );
+                      return CategoryCard();
                     },
                   ),
                 ),
               ),
               SliverToBoxAdapter(
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 0.0),
+                  padding: EdgeInsets.fromLTRB(25.0, 8.0, 25.0, 0.0),
                   height: 50.0,
                   child: Text(
                     'Upcoming Events',
-                    style: TextStyle(color: emPrimaryColor),
+                    style: TextStyle(color: emPrimaryColor, fontSize: 16.0),
                   ),
                 ),
               ),
-              SliverFixedExtentList(
-                itemExtent: 150.0,
+              SliverList(
                 delegate: SliverChildListDelegate(
                   [
-                    Container(color: Colors.red),
-                    Container(color: Colors.purple),
-                    Container(color: Colors.green),
-                    Container(color: Colors.orange),
-                    Container(color: Colors.yellow),
-                    Container(color: Colors.pink),
+                    EventCard(),
+                    EventCard(),
+                    EventCard(),
+                    EventCard(),
                   ],
                 ),
               ),
