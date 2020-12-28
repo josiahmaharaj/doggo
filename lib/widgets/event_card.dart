@@ -1,4 +1,4 @@
-import 'package:events_mobile/components/colors.dart';
+import 'package:dog_ceo/components/colors.dart';
 import 'package:flutter/material.dart';
 
 class EventCard extends StatelessWidget {

@@ -1,8 +1,8 @@
-import 'package:events_mobile/router.dart';
+import 'package:dog_ceo/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
-import 'package:events_mobile/bloc/_providers.dart';
+import 'package:dog_ceo/bloc/_providers.dart';
 
 
 Future main() async {
@@ -36,15 +36,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // FirebaseAnalytics analytics = FirebaseAnalytics();
-    //material app is wrapped in multiproviders so all children can access providers.
     return MultiProvider(
       providers: providers,
       child: MaterialApp(
-        // navigatorObservers: [
-        //   FirebaseAnalyticsObserver(analytics: analytics),
-        // ],
-        title: 'Events Mobile',
+        title: 'Dog CEO',
         theme: ThemeData(fontFamily: 'OpenSans'),
         debugShowCheckedModeBanner: false,
         // see router.dart

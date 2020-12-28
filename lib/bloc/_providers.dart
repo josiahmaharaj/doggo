@@ -1,4 +1,4 @@
-import 'package:events_mobile/bloc/auth_bloc.dart';
+import 'package:dog_ceo/bloc/auth_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 

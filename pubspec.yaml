@@ -1,5 +1,5 @@
-name: events_mobile
-description: Events Mobile app
+name: dog_ceo
+description: Dog CEO
 version: 1.0.0+1
 
 environment:
@@ -12,8 +12,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  provider: 4.1.0
+  provider: 4.3.2+2
   flutter_dotenv: ^2.1.0
+  http: 0.12.2
 
 dev_dependencies:
   flutter_test:

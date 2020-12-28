@@ -12,18 +12,6 @@ class Router {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => Home());
-    //   case '/route_overview':
-    //     // pass parameters to route
-    //     var data = settings.arguments as SingleRoute;
-    //     return MaterialPageRoute(builder: (_) => RouteOverview(data));
-    //   case '/user':
-    //     return MaterialPageRoute(builder: (_) => UserProfile());
-    //   case '/notifs':
-    //     return MaterialPageRoute(builder: (_) => NotifHistory());
-    //   case '/session':
-    //     return MaterialPageRoute(builder: (_) => SessionService());
-    //   case '/route_to_work':
-    //     return MaterialPageRoute(builder: (_) => RouteToWork());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
