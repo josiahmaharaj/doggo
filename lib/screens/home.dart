@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'dart:collection';
 import 'dart:convert';
 
+import 'package:dog_ceo/models/dogs.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -18,23 +18,7 @@ Future<Dogs> fetchDogs() async {
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.
-    throw Exception('Failed to load album');
-  }
-}
-
-class Dogs {
-  final List breeds;
-  final String status;
-
-  Dogs({this.breeds, this.status});
-
-  factory Dogs.fromJson(Map<String, dynamic> json) {
-    List breeds = [];
-    var dogCeoJson = json['message'];
-    for (var key in dogCeoJson.keys) breeds.add(key);
-    // Map<String,List> map = linkedHashMap.map((a, b) => MapEntry(a as String, b as List));
-
-    return Dogs(breeds: breeds, status: json['status']);
+    throw Exception('Failed to load api');
   }
 }
 
@@ -62,19 +46,29 @@ class _HomeState extends State<Home> {
           if (!snapshot.hasData) {
             // print(snapshot.data.message);
             // return Text(snapshot.data.status);
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
           return ListView.builder(
             itemCount: snapshot.data.breeds.length,
             itemBuilder: (context, index) {
               return Card(
-                child: ListTile(
-                  leading: Icon(Icons.pets),
-                  title: Text(
-                    snapshot.data.breeds[index],
-                    style: TextStyle(color: Colors.black),
+                child: FlatButton(
+                  padding: EdgeInsets.all(5),
+                  onPressed: () {
+                    // print(snapshot.data.breeds[index]);
+                    Navigator.pushNamed(context, '/breed',
+                        arguments: snapshot.data.breeds[index]);
+                  },
+                  child: ListTile(
+                    leading: Icon(Icons.pets),
+                    title: Text(
+                      snapshot.data.breeds[index],
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    trailing: Icon(Icons.chevron_right),
                   ),
-                  trailing: Icon(Icons.chevron_right),
                 ),
               );
             },
@@ -88,7 +82,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: emBackgroundColor,
-      appBar: AppBar(title: Text('Doggos')),
+      // appBar: AppBar(title: Text('Doggos')),
       body: dogsList(),
     );
   }
