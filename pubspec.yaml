@@ -15,7 +15,10 @@ dependencies:
   provider: 4.3.2+2
   flutter_dotenv: ^2.1.0
   http: 0.12.2
-  transparent_image: ^1.0.0
+  connectivity: ^2.0.2
+  assets_audio_player: ^2.0.13+1
+  retry: ^3.0.1
+  flutter_svg: ^0.19.2+1
 
 dev_dependencies:
   flutter_test:
@@ -32,6 +35,11 @@ flutter:
   uses-material-design: true
   assets:
     - assets/placeholder.png
+    - assets/bone.gif
+    - assets/bark_1.mp3
+    - assets/bark_2.mp3
+    - assets/bark_3.mp3
+    - assets/pug-min.jpg
     # - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

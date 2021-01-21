@@ -1,25 +1,37 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
+import 'package:dog_ceo/components/connectivity_status.dart';
 import 'package:dog_ceo/components/get_sub_breed.dart';
+import 'package:dog_ceo/components/capitalize.dart';
+import 'package:dog_ceo/components/colors.dart';
 import 'package:dog_ceo/models/dog-image.dart';
+import 'package:dog_ceo/screens/error.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:provider/provider.dart';
 
-import '../components/colors.dart';
+void playLocalAsset() async {
+  Random rnd = new Random();
+  int r = 1 + rnd.nextInt(4 - 1);
+  String path = "assets/bark_" + r.toString() + ".mp3";
+  AssetsAudioPlayer.newPlayer().open(
+    Audio(path),
+    autoStart: true,
+    showNotification: true,
+  );
+}
 
 Future<DogImage> fetchBreedPhotos(String breed) async {
   String apiCall = 'https://dog.ceo/api/breed/' + breed + '/images';
   final response = await http.get(apiCall);
 
   if (response.statusCode == 200) {
-    // If the server did return a 200 OK response,
-    // then parse the JSON.
     return DogImage.fromJson(jsonDecode(response.body));
   } else {
-    // If the server did not return a 200 OK response,
-    // then throw an exception.
     throw Exception('Failed to load api');
   }
 }
@@ -46,12 +58,6 @@ class _BreedState extends State<Breed> {
     return CustomScrollView(
       // shrinkWrap: true,
       slivers: <Widget>[
-        // SliverAppBar(
-        //   pinned: true,
-        //   flexibleSpace: FlexibleSpaceBar(
-        //     title: Text(widget.breed),
-        //   ),
-        // ),
         SliverToBoxAdapter(
           child: SafeArea(
             top: true,
@@ -67,7 +73,7 @@ class _BreedState extends State<Breed> {
                   },
                 ),
                 Text(
-                  widget.breed[0].toUpperCase() + widget.breed.substring(1),
+                  capitalize(widget.breed),
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
@@ -89,18 +95,27 @@ class _BreedState extends State<Breed> {
             return Container(
               padding: EdgeInsets.all(8.0),
               child: GridTile(
-                footer: new Text(
-                  getSubBreed(breedImage[index]),
-                  style: TextStyle(
-                    color: Colors.black,
-                    backgroundColor: emPrimaryColor,
+                // footer: Container(
+                //   padding: EdgeInsets.all(2.0),
+                //   color: emPrimaryColor,
+                //   child: new Text(
+                //     getSubBreed(breedImage[index]),
+                //     style: TextStyle(
+                //       color: Colors.black,
+                //       // backgroundColor: emPrimaryColor,
+                //     ),
+                //   ),
+                // ),
+                child: InkWell(
+                  onTap: () {
+                    playLocalAsset();
+                  },
+                  child: FadeInImage.assetNetwork(
+                    placeholder: 'assets/bone.gif',
+                    image: breedImage[index],
+                    fit: BoxFit.cover,
                   ),
                 ),
-                child: new FadeInImage.memoryNetwork(
-                  placeholder: kTransparentImage,
-                  image: breedImage[index],
-                  fit: BoxFit.cover,
-                ), //just for testing, will fill with image later
               ),
             );
           }, childCount: breedImage.length),
@@ -130,10 +145,14 @@ class _BreedState extends State<Breed> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: emBackgroundColor,
-      // appBar: AppBar(title: Text('Doggos')),
-      body: breedView(),
-    );
+    var connectionStatus = Provider.of<ConnectivityStatus>(context);
+    print(connectionStatus);
+    return connectionStatus == ConnectivityStatus.Offline
+        ? ErrorPage("Whoops! WiFi seems to be down 2")
+        : Scaffold(
+            backgroundColor: emBackgroundColor,
+            // appBar: AppBar(title: Text('Doggos')),
+            body: breedView(),
+          );
   }
 }

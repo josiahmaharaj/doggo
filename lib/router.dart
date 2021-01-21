@@ -1,4 +1,5 @@
 import 'package:dog_ceo/screens/breed.dart';
+import 'package:dog_ceo/screens/error.dart';
 import 'package:flutter/material.dart';
 import './screens/home.dart';
 
@@ -10,6 +11,9 @@ class Router {
       case '/breed':
         var data = settings.arguments;
         return MaterialPageRoute(builder: (_) => Breed(data));
+      case '/error':
+        var data = settings.arguments;
+        return MaterialPageRoute(builder: (_) => ErrorPage(data));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
