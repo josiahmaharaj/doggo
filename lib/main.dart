@@ -1,5 +1,5 @@
 import 'package:dog_ceo/components/connectivity_status.dart';
-import 'package:dog_ceo/router.dart';
+import 'package:dog_ceo/router.dart' as emRouter;
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         // see router.dart
         initialRoute: '/',
-        onGenerateRoute: Router.generateRoute,
+        onGenerateRoute: emRouter.Router.generateRoute,
       ),
     );
   }

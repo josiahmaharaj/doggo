@@ -18,7 +18,7 @@ dependencies:
   connectivity: ^2.0.2
   assets_audio_player: ^2.0.13+1
   retry: ^3.0.1
-  flutter_svg: ^0.19.2+1
+  flutter_svg: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +40,7 @@ flutter:
     - assets/bark_2.mp3
     - assets/bark_3.mp3
     - assets/pug-min.jpg
+    - assets/dog-api-logo.svg
     # - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

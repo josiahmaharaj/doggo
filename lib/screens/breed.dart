@@ -55,72 +55,38 @@ class _BreedState extends State<Breed> {
   }
 
   Widget photoGrid(List<String> breedImage) {
-    return CustomScrollView(
-      // shrinkWrap: true,
-      slivers: <Widget>[
-        SliverToBoxAdapter(
-          child: SafeArea(
-            top: true,
-            child: Row(
-              children: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.navigate_before,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-                Text(
-                  capitalize(widget.breed),
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+      itemCount: breedImage.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          padding: EdgeInsets.all(1.0),
+          child: GridTile(
+            // footer: Container(
+            //   padding: EdgeInsets.all(2.0),
+            //   color: emPrimaryColor,
+            //   child: new Text(
+            //     getSubBreed(breedImage[index]),
+            //     style: TextStyle(
+            //       color: Colors.black,
+            //       // backgroundColor: emPrimaryColor,
+            //     ),
+            //   ),
+            // ),
+            child: InkWell(
+              onTap: () {
+                playLocalAsset();
+              },
+              child: FadeInImage.assetNetwork(
+                placeholder: 'assets/bone.gif',
+                image: breedImage[index],
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 0.0,
-            mainAxisSpacing: 0.0,
-          ),
-          delegate:
-              SliverChildBuilderDelegate((BuildContext context, int index) {
-            return Container(
-              padding: EdgeInsets.all(8.0),
-              child: GridTile(
-                // footer: Container(
-                //   padding: EdgeInsets.all(2.0),
-                //   color: emPrimaryColor,
-                //   child: new Text(
-                //     getSubBreed(breedImage[index]),
-                //     style: TextStyle(
-                //       color: Colors.black,
-                //       // backgroundColor: emPrimaryColor,
-                //     ),
-                //   ),
-                // ),
-                child: InkWell(
-                  onTap: () {
-                    playLocalAsset();
-                  },
-                  child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/bone.gif',
-                    image: breedImage[index],
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-            );
-          }, childCount: breedImage.length),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -151,7 +117,11 @@ class _BreedState extends State<Breed> {
         ? ErrorPage("Whoops! WiFi seems to be down 2")
         : Scaffold(
             backgroundColor: emBackgroundColor,
-            // appBar: AppBar(title: Text('Doggos')),
+            appBar: AppBar(
+              title: Text(capitalize(widget.breed)),
+              backgroundColor: emBackgroundColor,
+              elevation: 0.1,
+            ),
             body: breedView(),
           );
   }

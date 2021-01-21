@@ -10,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:retry/retry.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../components/colors.dart';
 // import '../models/breeds.dart';
@@ -73,13 +74,19 @@ class _HomeState extends State<Home> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text(
-                                "Dog CEO",
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              // Text(
+                              //   "Dog CEO",
+                              //   style: TextStyle(
+                              //     fontSize: 20.0,
+                              //     color: Colors.white,
+                              //     fontWeight: FontWeight.bold,
+                              //   ),
+                              // ),
+                              SvgPicture.asset(
+                                'assets/dog-api-logo.svg',
+                                semanticsLabel: 'Acme Logo',
+                                color: Colors.white,
+                                height: 120.0,
                               ),
                             ],
                           ),
@@ -89,31 +96,36 @@ class _HomeState extends State<Home> {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (context, index) {
-                          return Card(
-                            margin: new EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 6.0),
-                            child: FlatButton(
-                              color: emTileColor,
-                              padding: EdgeInsets.all(5),
-                              onPressed: () {
-                                // print(snapshot.data.breeds[index]);
-                                Navigator.pushNamed(context, '/breed',
-                                    arguments: snapshot.data.breeds[index]);
-                              },
-                              child: ListTile(
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 10.0),
-                                leading:
-                                    Icon(Icons.pets, color: emPrimaryColor),
-                                title: Text(
-                                  capitalize(snapshot.data.breeds[index]),
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                trailing: Icon(
-                                  Icons.chevron_right,
-                                  color: Colors.white,
+                          return Container(
+                            height: 75,
+                            alignment: Alignment.center,
+                            child: Card(
+                              semanticContainer: true,
+                              margin: new EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 6.0),
+                              child: FlatButton(
+                                color: emTileColor,
+                                padding: EdgeInsets.all(5),
+                                onPressed: () {
+                                  // print(snapshot.data.breeds[index]);
+                                  Navigator.pushNamed(context, '/breed',
+                                      arguments: snapshot.data.breeds[index]);
+                                },
+                                child: ListTile(
+                                  // contentPadding: EdgeInsets.symmetric(
+                                  //     horizontal: 20.0, vertical: 10.0),
+                                  leading:
+                                      Icon(Icons.pets, color: emPrimaryColor),
+                                  title: Text(
+                                    capitalize(snapshot.data.breeds[index]),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  trailing: Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
