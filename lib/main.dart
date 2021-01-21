@@ -27,6 +27,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("assets/pug-min.jpg"), context);
     return StreamProvider<ConnectivityStatus>(
       create: (_) => ConnectivityService().connectionStatusController.stream,
       child: MaterialApp(

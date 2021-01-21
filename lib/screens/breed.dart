@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:dog_ceo/components/connectivity_status.dart';
-import 'package:dog_ceo/components/get_sub_breed.dart';
+// import 'package:dog_ceo/components/get_sub_breed.dart';
 import 'package:dog_ceo/components/capitalize.dart';
 import 'package:dog_ceo/components/colors.dart';
 import 'package:dog_ceo/models/dog-image.dart';

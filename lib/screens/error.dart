@@ -21,15 +21,27 @@ class ErrorPage extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: Column(
                 children: <Widget>[
-                  SafeArea(
-                    child: Text(errorMessage ?? 'Error'),
+                  SizedBox(
+                    height: 20.0,
                   ),
-                  RaisedButton(
-                    child: Text('Retry'),
-                    onPressed: () {
-                      Navigator.popAndPushNamed(context, '/');
-                    },
-                  )
+                  SafeArea(
+                    child: Text(
+                      errorMessage ?? 'Error',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "We're retrying",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  CircularProgressIndicator(),
                 ],
               )),
         ],

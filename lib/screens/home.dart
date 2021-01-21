@@ -10,7 +10,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:retry/retry.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../components/colors.dart';
 // import '../models/breeds.dart';
@@ -30,7 +29,9 @@ Future<Dogs> fetchDogs() async {
     hasError = true;
     errorMessage = "An error occured";
   }
-  return Dogs.fromJson(jsonDecode(response.body));
+  return Dogs.fromJson(
+    jsonDecode(response.body),
+  );
 }
 
 class Home extends StatefulWidget {
@@ -56,14 +57,15 @@ class _HomeState extends State<Home> {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             // Navigator.pushNamed(context, '/breed');
-            errorMessage = snapshot.error.toString();
+            print(snapshot.error.toString());
           } else if (!snapshot.hasData) {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
           return hasError
-              ? ErrorPage(errorMessage)
+              ? ErrorPage(
+                  errorMessage = "uh, there was a problem fetching the dogs...")
               : CustomScrollView(
                   slivers: <Widget>[
                     SliverToBoxAdapter(
@@ -74,17 +76,8 @@ class _HomeState extends State<Home> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              // Text(
-                              //   "Dog CEO",
-                              //   style: TextStyle(
-                              //     fontSize: 20.0,
-                              //     color: Colors.white,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
-                              SvgPicture.asset(
-                                'assets/dog-api-logo.svg',
-                                semanticsLabel: 'Acme Logo',
+                              Image.asset(
+                                'assets/logo.png',
                                 color: Colors.white,
                                 height: 120.0,
                               ),
@@ -141,12 +134,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  // final topAppBar = AppBar(
-  //   elevation: 0.1,
-  //   backgroundColor: emBackgroundColor,
-  //   title: Text('Dog CEO'),
-  // );
-
   @override
   Widget build(BuildContext context) {
     var connectionStatus = Provider.of<ConnectivityStatus>(context);
@@ -154,7 +141,7 @@ class _HomeState extends State<Home> {
     hasError = false;
     return (connectionStatus == ConnectivityStatus.Offline ||
             connectionStatus == null)
-        ? ErrorPage(errorMessage = "Whoops! WiFi seems to be down")
+        ? ErrorPage(errorMessage = "Ruh-roh! WiFi seems to be down.")
         : Scaffold(
             backgroundColor: emBackgroundColor,
             body: dogsList(),
