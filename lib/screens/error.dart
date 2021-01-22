@@ -1,8 +1,9 @@
-import 'package:dog_ceo/screens/home.dart';
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
-  const ErrorPage(String errorMessage);
+  ErrorPage(this.errorMessage);
+
+  final String errorMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +27,14 @@ class ErrorPage extends StatelessWidget {
                   ),
                   SafeArea(
                     child: Text(
-                      errorMessage ?? 'Error',
+                      errorMessage,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   Text(
-                    "We're retrying",
+                    "",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),

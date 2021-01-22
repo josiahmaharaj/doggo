@@ -1,3 +1,7 @@
+// Service for checking internet connection.
+// When the connection changes the Stream Provider
+// would capture it and make relevant changes to ui
+
 import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';

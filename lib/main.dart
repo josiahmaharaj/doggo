@@ -1,13 +1,11 @@
 import 'package:dog_ceo/components/connectivity_status.dart';
 import 'package:dog_ceo/router.dart' as emRouter;
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:dog_ceo/services/connectivity_service.dart';
 
 Future main() async {
   //using custom provider
-  await DotEnv().load('.env');
   Provider.debugCheckInvalidValueType = null;
 
   runApp(MyApp());
